@@ -15,32 +15,7 @@ code {
 input {
   outline: none;
 }
-.papka {
-  /* margin: 0 auto; */
-  max-width: 500px;
-  left: 0;
-  background-color: aquamarine;
-}
-.papkaa {
-  /* margin: 0 auto; */
-  max-width: 500px;
-  left: 0;
-  background-color: aquamarine;
-}
-.name-papka {
-  font-size: 14px;
-  margin: 0;
-}
-.papka-name {
+.list {
   display: flex;
-  gap: 10px;
-}
-.input-name-papka {
-  font-size: 14px;
-}
-.edit {
-  width: 50px;
-}
-.badge {
-  display: flex;
+  gap: 20px;
 }
