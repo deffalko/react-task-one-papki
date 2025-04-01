@@ -1,82 +1,43 @@
-import { render } from "@testing-library/react";
 import React, { useState } from "react";
 
-function Papka() {
-  // Состояние для хранения названия
-  const [title, setTitle] = useState("Название");
-  // Состояние для управления вводом
-  const [isEditing, setIsEditing] = useState(false);
-  const [inputValue, setInputValue] = useState(title);
+const ItemList = () => {
+  // Инициализация состояния для хранения элементов
+  const [items, setItems] = useState([]);
+  const [inputValue, setInputValue] = useState("");
 
-  const handleEditClick = () => {
-    setIsEditing(true);
+  // Функция для добавления нового элемента
+  const addItem = () => {
+    if (inputValue) {
+      const newItem = { id: Date.now(), name: inputValue }; // Создаем новый элемент с уникальным id
+      setItems([...items, newItem]); // Обновляем состояние, добавляя новый элемент
+      setInputValue(""); // Очищаем поле ввода
+    }
   };
 
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+  // Функция для удаления элемента
+  const removeItem = (id) => {
+    setItems(items.filter((item) => item.id !== id)); // Фильтруем элементы, исключая удаляемый
   };
 
-  const handleSaveClick = () => {
-    setTitle(inputValue);
-    setIsEditing(false);
-  };
-
-  const handleCancelClick = () => {
-    setInputValue(title); // Возврат к предыдущему значению
-    setIsEditing(false);
-  };
-
-  const addPapka = () => {
-    render(
-      <div className="papkaa">
-        <a href="#!" class="collection-item">
-          <span class="badge" onClick={addPapka}>
-            <i class="material-icons">add</i>
-          </span>
-          <i class="material-icons">email</i>
-        </a>
-      </div>
-    );
-  };
   return (
-    <div className="papkaa">
-      <a href="#!" class="collection-item">
-        <span class="badge">
-          <div className="edit" onClick={handleEditClick}>
-            <i class="material-icons">edit</i>
-          </div>
-          <i class="material-icons" onClick={addPapka}>
-            add
-          </i>
-        </span>
-      </a>
-      {isEditing ? (
-        <div>
-          <div className="papka-name">
-            <i class="material-icons">email</i>
-            <input
-              className="input-name-papka"
-              type="text"
-              value={inputValue}
-              onChange={handleInputChange}
-            />
-          </div>
-          <button className="btn" onClick={handleSaveClick}>
-            Сохранить
-          </button>
-          <button className="btn" onClick={handleCancelClick}>
-            Отменить
-          </button>
-        </div>
-      ) : (
-        <div>
-          <div className="papka-name">
-            <i class="material-icons">email</i>
-            <h1 className="name-papka">{title}</h1>
-          </div>
-        </div>
-      )}
+    <div>
+      <h1>Список элементов</h1>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)} // Обновляем состояние при вводе
+      />
+      <button onClick={addItem}>Добавить элемент</button>
+      <ul>
+        {items.map((item) => (
+          <li key={item.id}>
+            {item.name}
+            <button onClick={() => removeItem(item.id)}>Удалить</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
-}
-export { Papka };
+};
+
+export default ItemList;
