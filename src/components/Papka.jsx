@@ -1,4 +1,6 @@
+import { render } from "@testing-library/react";
 import React, { useState } from "react";
+import { Item } from "./Item";
 
 const ItemList = () => {
   // Инициализация состояния для хранения элементов
@@ -13,6 +15,13 @@ const ItemList = () => {
       const newItem = { id: Date.now(), name: inputValue }; // Создаем новый элемент с уникальным id
       setItems([...items, newItem]); // Обновляем состояние, добавляя новый элемент
       setInputValue(""); // Очищаем поле ввода
+    }
+    if (inputValue === "d") {
+      console.log("dsds");
+      const newItem = { id: Date.now(), name: inputValue }; // Создаем новый элемент с уникальным id
+      setItems([...items, newItem]); // Обновляем состояние, добавляя новый элемент
+      removeItem();
+      setInputValue("пожалуйста без знаков"); // Очищаем поле ввода
     }
   };
 
@@ -49,6 +58,10 @@ const ItemList = () => {
     }
   };
 
+  const addText = () => {
+    render(<Item />);
+  };
+
   return (
     <div>
       <h1>Список элементов</h1>
@@ -78,6 +91,9 @@ const ItemList = () => {
             </button>
             <button className="btn" onClick={() => removeItem(item.id)}>
               <i className="material-icons">delete</i>
+            </button>
+            <button className="btn" onClick={() => addText(item)}>
+              <i className="material-icons">add</i>
             </button>
           </li>
         ))}
