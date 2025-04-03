@@ -1,7 +1,7 @@
-import ItemList from "./Papka";
+import { Home } from "./Home";
 
 function Main() {
-  return <ItemList />;
+  return <Home />;
 }
 
 export { Main };
